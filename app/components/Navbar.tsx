@@ -11,7 +11,9 @@ export default function Navbar() {
   const pathname = usePathname()
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10)
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10)
+    }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -25,16 +27,26 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl transition-all duration-300 ${
-        scrolled ? 'bg-white/70 shadow-lg backdrop-blur-md' : 'bg-white/40 shadow-sm backdrop-blur-md'
-      } rounded-2xl px-4 py-2`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? 'bg-white/70 backdrop-blur-md shadow-md' : 'bg-transparent'
+      }`}
+      style={{
+        borderBottom: scrolled ? '1px solid rgba(0,0,0,0.06)' : 'none',
+      }}
       aria-label="Main navigation"
     >
-      {/* Decorative background element */}
-      <div className="absolute -z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-20 bg-neutral-300/20 rounded-full blur-3xl pointer-events-none" />
+      {/* Decorative blurred blob */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-24 bg-neutral-200/30 rounded-full blur-2xl pointer-events-none -z-10" />
 
-      <div className="flex items-center justify-between relative">
-        {/* Left links */}
+      <div
+        className={`max-w-7xl mx-auto flex items-center justify-between px-4 py-3 transition-all duration-300 ${
+          scrolled
+            ? 'rounded-xl shadow-lg mt-4 mb-4 md:my-4 md:rounded-xl md:w-[95%] md:px-8'
+            : ''
+        }`}
+        style={{ background: 'transparent' }}
+      >
+        {/* Left nav links */}
         <div className="hidden md:flex gap-8 flex-1 justify-end">
           {navLinks.slice(0, 2).map(({ name, path }) => (
             <Link
@@ -57,14 +69,14 @@ export default function Navbar() {
             <Image
               src="/images/logo-main.png"
               alt="Ethereal Spaces Logo"
-              width={140}
-              height={50}
+              width={160}
+              height={60}
               priority
             />
           </Link>
         </div>
 
-        {/* Right links */}
+        {/* Right nav links */}
         <div className="hidden md:flex gap-8 flex-1 justify-start">
           {navLinks.slice(2).map(({ name, path }) => (
             <Link
@@ -97,8 +109,8 @@ export default function Navbar() {
 
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
-        <div className="md:hidden pt-4 text-center">
-          <div className="flex flex-col gap-3">
+        <div className="md:hidden px-4 pb-4 bg-white/80 backdrop-blur-md shadow-md rounded-b-xl">
+          <div className="flex flex-col gap-4 pt-2 text-center">
             {navLinks.map(({ name, path }) => (
               <Link
                 key={path}
