@@ -36,21 +36,35 @@ export default function Home() {
   return (
     <div className="bg-white min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1 flex flex-col gap-0">
+
+      <main className="flex-1 flex flex-col gap-6 sm:gap-10">
         <HeroSection />
-        <section className="bg-white">
-          <AboutSection />
+
+        <section className="bg-white py-6 sm:py-12 px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto">
+            <AboutSection />
+          </div>
         </section>
-        <section className="bg-neutral-50">
-          <ProjectGallery projects={projects} />
+
+        <section className="bg-neutral-50 py-6 sm:py-12 px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto">
+            <ProjectGallery projects={projects} />
+          </div>
         </section>
-        <section className="bg-white">
-          <ServicesSection />
+
+        <section className="bg-white py-6 sm:py-12 px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto">
+            <ServicesSection />
+          </div>
         </section>
-        <section className="bg-neutral-50 pb-20">
-          <InquiryForm />
+
+        <section className="bg-neutral-50 pb-20 pt-6 sm:pt-12 px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto">
+            <InquiryForm />
+          </div>
         </section>
       </main>
+
       <Footer />
     </div>
   )

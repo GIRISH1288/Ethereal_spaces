@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import Link from 'next/link'
 import Image from 'next/image'
@@ -28,7 +28,7 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/70 backdrop-blur-md shadow-md' : 'bg-transparent'
+        scrolled ? 'bg-white/30 backdrop-blur-md shadow-md' : 'bg-transparent'
       }`}
       style={{
         borderBottom: scrolled ? '1px solid rgba(0,0,0,0.06)' : 'none',
@@ -36,7 +36,7 @@ export default function Navbar() {
       aria-label="Main navigation"
     >
       {/* Decorative blurred blob */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-24 bg-neutral-200/30 rounded-full blur-2xl pointer-events-none -z-10" />
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-24 bg-neutral-200/10 rounded-full blur-2xl pointer-events-none -z-10" />
 
       <div
         className={`max-w-7xl mx-auto flex items-center justify-between px-4 py-3 transition-all duration-300 ${
@@ -54,8 +54,8 @@ export default function Navbar() {
               href={path}
               className={`relative transition font-medium px-2 py-1
                 after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:w-full after:h-[2px] after:bg-neutral-400 after:scale-x-0 after:transition-transform after:duration-300 after:origin-left hover:after:scale-x-100
-                hover:text-accent
-                ${pathname === path ? 'text-accent after:scale-x-100 after:bg-accent' : 'text-neutral-800'}
+                hover:text-neutral-600
+                ${pathname === path ? 'text-neutral-600 after:scale-x-100 after:bg-neutral-400' : 'text-neutral-800'}
               `}
             >
               {name}
@@ -84,8 +84,8 @@ export default function Navbar() {
               href={path}
               className={`relative transition font-medium px-2 py-1
                 after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:w-full after:h-[2px] after:bg-neutral-400 after:scale-x-0 after:transition-transform after:duration-300 after:origin-left hover:after:scale-x-100
-                hover:text-accent
-                ${pathname === path ? 'text-accent after:scale-x-100 after:bg-accent' : 'text-neutral-800'}
+                hover:text-neutral-600
+                ${pathname === path ? 'text-neutral-600 after:scale-x-100 after:bg-neutral-400' : 'text-neutral-800'}
               `}
             >
               {name}
@@ -95,21 +95,27 @@ export default function Navbar() {
 
         {/* Mobile Hamburger */}
         <button
-          className="md:hidden flex items-center"
+          className="md:hidden flex items-center justify-center w-10 h-10 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-neutral-600"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          type="button"
         >
           <div className="w-6 h-6 flex flex-col justify-between">
-            <span className="block h-0.5 bg-neutral-800"></span>
-            <span className="block h-0.5 bg-neutral-800"></span>
-            <span className="block h-0.5 bg-neutral-800"></span>
+            <span className="block h-0.5 bg-neutral-800 rounded"></span>
+            <span className="block h-0.5 bg-neutral-800 rounded"></span>
+            <span className="block h-0.5 bg-neutral-800 rounded"></span>
           </div>
         </button>
       </div>
 
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
-        <div className="md:hidden px-4 pb-4 bg-white/80 backdrop-blur-md shadow-md rounded-b-xl">
+        <div
+          id="mobile-menu"
+          className="md:hidden px-4 pb-4 bg-white/80 backdrop-blur-md shadow-md rounded-b-xl animate-fadeIn"
+        >
           <div className="flex flex-col gap-4 pt-2 text-center">
             {navLinks.map(({ name, path }) => (
               <Link
@@ -118,8 +124,8 @@ export default function Navbar() {
                 onClick={() => setMenuOpen(false)}
                 className={`relative block py-2 transition font-medium
                   after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-0.5 after:w-2/3 after:h-[2px] after:bg-neutral-400 after:scale-x-0 after:transition-transform after:duration-300 after:origin-left hover:after:scale-x-100
-                  hover:text-accent
-                  ${pathname === path ? 'text-accent after:scale-x-100 after:bg-accent' : 'text-neutral-800'}
+                  hover:text-neutral-600
+                  ${pathname === path ? 'text-neutral-600 after:scale-x-100 after:bg-neutral-400' : 'text-neutral-800'}
                 `}
               >
                 {name}
