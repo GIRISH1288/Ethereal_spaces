@@ -5,14 +5,7 @@ export default function AboutPage() {
     <div className="bg-white min-h-screen flex flex-col">
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden px-4 sm:px-6">
-        <Image
-          src="/images/logo-main.png"
-          alt="Ethereal Spaces Logo"
-          width={260}
-          height={90}
-          className="mx-auto z-10 relative"
-          priority
-        />
+        
         <div className="absolute inset-0 bg-gradient-to-t from-white/90 to-transparent" />
         <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-2">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-light tracking-wide text-neutral-900 mb-4 text-center">
@@ -26,7 +19,8 @@ export default function AboutPage() {
 
       {/* Story / Vision Section */}
       <section className="max-w-5xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl font-serif mb-8 text-center">Our Story</h2>
+      <h2 className="text-3xl sm:text-4xl font-serif mb-8 text-center text-black">Our Story</h2>
+
         <p className="text-base sm:text-lg md:text-xl text-neutral-700 leading-relaxed text-center max-w-3xl mx-auto">
           Founded on a passion for timeless design and modern luxury, Ethereal Spaces is dedicated to transforming interiors into works of art. Our philosophy is rooted in simplicity, attention to detail, and a deep appreciation for spatial harmony. We believe that every space should evoke a sense of calm, beauty, and inspiration.
         </p>
@@ -34,7 +28,8 @@ export default function AboutPage() {
 
       {/* Team Section */}
       <section className="bg-neutral-50 py-16 px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl font-serif mb-12 text-center">Meet the Team</h2>
+      <h2 className="text-3xl sm:text-4xl font-serif mb-12 text-center text-black">Meet the Team</h2>
+
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 items-start">
           {/* Team Member 1 */}
           <div className="flex flex-col items-center text-center">
