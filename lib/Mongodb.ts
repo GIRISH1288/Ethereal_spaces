@@ -1,38 +1,18 @@
-import mongoose from 'mongoose';
+import { NextResponse } from 'next/server';
+import connectToDB from '@/lib/Mongodb';
 
-const MONGODB_URI: string | undefined = process.env.MONGODB_URI;
-
-if (!MONGODB_URI) {
-  throw new Error('⚠️ Please define the MONGODB_URI inside .env.local');
-}
-
-// Define types for the cache object
-interface MongooseCache {
-  conn: typeof mongoose | null;
-  promise: Promise<typeof mongoose> | null;
-}
-
-// Extend global object to include mongoose cache
-declare global {
-  // eslint-disable-next-line no-var
-  var mongoose: MongooseCache | undefined;
-}
-
-// Global cache to avoid reconnecting in dev mode
-const cached: MongooseCache = global.mongoose || { conn: null, promise: null };
-global.mongoose = cached;
-
-async function connectToDB(): Promise<typeof mongoose> {
-  if (cached.conn) return cached.conn;
-
-  if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI as string, {
-      dbName: 'etherial-spaces',
-    }).then((mongoose) => mongoose);
+export async function GET(_req: Request) {
+  try {
+    // Check if MONGODB_URI exists before connecting
+    if (!process.env.MONGODB_URI) {
+      return NextResponse.json({ 
+        message: "Database connection not configured" 
+      }, { status: 200 });
+    }
+    
+    await connectToDB();
+    return NextResponse.json({ message: "Database connected successfully!" });
+  } catch (_error) {
+    return NextResponse.json({ error: "Database connection failed" }, { status: 500 });
   }
-
-  cached.conn = await cached.promise;
-  return cached.conn;
 }
-
-export default connectToDB;
